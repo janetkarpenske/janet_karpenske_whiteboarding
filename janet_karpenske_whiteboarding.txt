@@ -1,0 +1,168 @@
+PROMPT 1: string to URL (without recusrsion)     
+
+let stringInput; 
+
+function (stringInput) {
+    let stringArray = stringInput.split('');      			    //splits into an array of individual characters
+        stringArray.foreach(function(char) {
+	    if (char == ' ') {
+		stringArray[char] = '%20';	
+	    }                                                              //iterates through each element and replaces any spaces with '%20'	                               //rejoin array of characters by character
+	});
+    let urlString = stringArray.join('');
+    return urlString;
+}
+
+WITH RECURSION:
+ 
+
+function URL(stringArray, counter) {
+   if (counter <= stringArray.length()){
+      if (stringArray[counter] == ' ') {
+         stringArray[counter] = '%20';
+      }
+   return URL(stringArray, counter + 1)                                    //recursion
+   }
+   else {
+   return stringArray;                                                     //base
+   }
+}
+
+let array = originalString.split('');
+//Called by: URL(array, 0);
+___________________________________________________________________________________
+PROMPT 2: Remove Duplicates (without recusrsion)        
+
+function dedupe (inputArray) {
+   let histArray = [];                                        //empty array to store each element as it looks at the element
+   let newArray = [];                                            //empty array to store the new array with no duplicates to be returned
+   inputArray.foreach(function(element) {
+	histArray.foreach(function((e) {
+	if (element != e) {                                   //nested loop goes through and sees if the element already exists in the 
+	   histArray.push(element);                         history loop. If not it adds it to the newArray and historyArray.
+	   newArray.push(element);
+	   }
+	});
+   });
+   return newArray;
+}
+_______________________
+WITH RECURSION:
+function dedupe (inputArray, histArray, newArray, counter) {
+   if (counter <= inputArray.length()) {
+      histArray.foreach(function(e){
+       if (inputArray[counter] != e) {
+          histArray.push(inputArray[counter]);
+          newArray.push(inputArray[counter]);
+         }
+      });
+   dedupe (inputArray, histArray, newArray, counter + 1);             //recursion
+   }
+   else {
+      return newArray;                                                                  //base
+   }
+}
+
+Initially Called by: 
+deduplicate(originalArray, let historyArray = [], let newArray = [], 0);
+___________________________________________________________________________________
+PROMPT 3: Repeated character Counter (without recursion)  CHECKED!
+
+function charCounter(inputString) {
+   let splitString = inputString.split('');
+   let charCounter = 0; 1
+   let indexTracker = 0; 6
+   let placeholder = 0;
+   splitString.foreach(function(element){
+      if (splitString[indexTracker] == splitString[indexTracker] - 1 || indexTracker = 0) {            //if the current element matches the previous element, or if it's the first element, add to counter
+        charCount +=1;
+        indexTracker += 1;
+        }
+      else if (splitString[indexTracker] != splitString[indexTracker] - 1) {         //if current element does not equal the previous element, then it must be different. Splice counter into array at placeholder and reset it.
+        splitString.splice(placeholder, 0, "'" + charCounter + "'");                             //splices the counted number of elements into the array
+        charCounter = 1;
+        indexTracker +=2;                                                            //adds 2 to indexTracker because of the additional element spliced in and the normal iteration
+        placeholder = splitString[indexTracker - 1]; //5                               //establishes the placeholder
+        }
+   });
+   newString = inputString.join('');
+   return newString;
+}
+
+WITH RECURSION:
+
+function charCounter(inputArray, charCounter, indexTracker, placeholder) {
+      if (splitString[indexTracker] == splitString[indexTracker] - 1 || indexTracker = 0) { 
+        charCount +=1;
+        indexTracker += 1;
+        }
+      else if (splitString[indexTracker] != splitString[indexTracker] - 1) {       
+        splitString.splice(placeholder, 0, "'" + charCounter + "'");                             
+        charCounter = 1;
+        indexTracker +=2;                                                           
+        placeholder = splitString[indexTracker - 1]; //5                               
+        }
+}
+__________________________________________________________________________________________
+PROMPT 4: Checking for Uniqueness (Without Recursion) No arrays allowed!
+
+function (inputString) {
+   let bool = true;
+   for (let i = 0; i <= inputString.length - 1; i++) {
+      for (let j = 0; j <= inputString.length; j++) {
+      if (inputString.charAt(i) == inputString.charAt(j) && i != j)               //if element equals to any other elements in the array AND the elements are not at the same index, boolean switches to false
+      	bool = false;
+      }
+   }
+   return boolean;
+}
+
+WITH RECURSION:
+___________________________________________________________________________________________
+PROMPT 5: Array Sorting (Quick Sort method) CHECKED
+
+function quickSortSeparate (inputArray, leftIndex, rightIndex) {
+   let pivot = inputArray[Math.floor(inputArray.length / 2)]
+   let leftIndex = leftIndex;
+   let rightIndex = rightIndex;
+
+   while (leftIndex <= rightIndex){
+      while(leftIndex < pivot) {
+         leftIndex += 1;
+      }
+      while(rightIndex >= pivot){
+         rightIndex -=1;
+      }
+      if(leftIndex <= rightIndex){                               
+         let origLeftIndex = inputArray[leftIndex];
+         inputArray[leftIndex] = inputArray[rightIndex];          
+         inputArray[rightIndex] = inputArray[origLeftIndex]
+         leftIndex += 1;
+         rightIndex -=1;
+      }
+   }
+   return leftIndex;
+}
+
+function quickSort(inputArray, leftIndex, rightIndex) {
+   let tempIndex;
+    if (inputArray.length > 1) {
+       tempIndex = quickSortSeparate(inputArray, leftIndex, rightIndex);
+        if (leftIndex < tempIndex - 1) {
+            quickSortSeparate(inputArray, leftIndex, tempIndex - 1);
+        }
+        if (tempIndex < rightIndex) {
+            quickSortSeparate(inputArray, tempIndex, rightIndex);
+        }
+    }
+    return inputArray;
+}
+
+//Call function with:
+let array = [0, 12, 3, 5, 1, 20];
+let quickSortedArray = quickSort(array, 0, array.length - 1);
+
+Explanation of QuickSorting:
+https://www.guru99.com/quicksort-in-javascript.html 
+
+
